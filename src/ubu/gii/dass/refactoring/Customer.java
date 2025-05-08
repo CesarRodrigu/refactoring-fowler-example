@@ -30,7 +30,7 @@ public class Customer {
 		return _name;
 	};
 
-	public String statement() {
+	public String generateTextStatement() {
 		double totalAmount = 0;
 		int frequentRenterPoints = 0;
 		Iterator<Rental> rentals = _rentals.iterator();
