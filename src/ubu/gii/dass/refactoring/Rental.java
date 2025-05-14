@@ -28,6 +28,11 @@ public class Rental {
 	}
 
 	double cantidadDeLineas(double thisAmount) {
+		thisAmount = getCharge(thisAmount);
+		return thisAmount;
+	}
+
+	private double getCharge(double thisAmount) {
 		switch (getMovie().getPriceCode()) {
 		case Movie.REGULAR:
 			thisAmount += 2;
