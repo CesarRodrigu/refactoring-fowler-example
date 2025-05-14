@@ -10,7 +10,9 @@ package ubu.gii.dass.refactoring;
 * @see java.io.File
 *
 */
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Customer {
 	private String _name;
@@ -36,28 +38,24 @@ public class Customer {
 		Iterator<Rental> rentals = _rentals.iterator();
 		String result = "Rental Record for " + getName() + "\n";
 		while (rentals.hasNext()) {
-			double thisAmount = 0;
 			Rental each = rentals.next();
 			// determine amounts for each line
-			thisAmount = each.cantidadDeLineas(thisAmount);
-			
+			double thisAmount = each.getCharge();
+
 			// add frequent renter points
 			frequentRenterPoints++;
 			int frequentRenterPoints1 = frequentRenterPoints;
-			if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE)
-				&& each.getDaysRented() > 1)
-			frequentRenterPoints1++;
+			if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1)
+				frequentRenterPoints1++;
 			// add bonus for a two day new release rental
 			frequentRenterPoints = frequentRenterPoints1;
 			// show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t"
-					+ String.valueOf(thisAmount) + "\n";
+			result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
 			totalAmount += thisAmount;
 		}
 		// add footer lines
 		result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-		result += "You earned " + String.valueOf(frequentRenterPoints)
-				+ " frequent renter points";
+		result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
 		return result;
 	}
 }

@@ -1,4 +1,5 @@
 package ubu.gii.dass.refactoring;
+
 /**
  * Tema Refactorizaciones
  * 
@@ -27,12 +28,9 @@ public class Rental {
 		return _movie;
 	}
 
-	double cantidadDeLineas(double thisAmount) {
-		thisAmount = getCharge(thisAmount);
-		return thisAmount;
-	}
+	public double getCharge() {
+		double thisAmount = 0;
 
-	private double getCharge(double thisAmount) {
 		switch (getMovie().getPriceCode()) {
 		case Movie.REGULAR:
 			thisAmount += 2;
