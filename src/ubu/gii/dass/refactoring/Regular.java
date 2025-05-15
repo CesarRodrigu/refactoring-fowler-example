@@ -6,4 +6,11 @@ public class Regular extends Price {
 		return Movie.REGULAR;	
 	}
 	
+	public double getCharge(Rental rental) {
+        double amount = 2;
+        if (rental.getDaysRented() > 2)
+            amount += (rental.getDaysRented() - 2) * 1.5;
+        return amount;
+    }
+	
 }
