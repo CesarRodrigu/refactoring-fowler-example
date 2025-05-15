@@ -1,4 +1,7 @@
 package ubu.gii.dass.refactoring;
+
+import ubu.gii.dass.refactoring.Rental;
+
 /**
  * Tema Refactorizaciones
  * 
@@ -12,27 +15,44 @@ package ubu.gii.dass.refactoring;
  */
 
 public class Movie {
-	public static final int CHILDRENS = 2;
-	public static final int REGULAR = 0;
-	public static final int NEW_RELEASE = 1;
-
+		
 	private String _title;
-	private int _priceCode;
+	Price _price;
 
-	public Movie(String title, int priceCode) {
+	public Movie(String title, Price price) {
 		_title = title;
-		_priceCode = priceCode;
+		setPrice(price);
 	}
-
-	public int getPriceCode() {
-		return _priceCode;
+	
+	public void setPrice(Price price) {
+		_price=price;
 	}
 
 	public void setPriceCode(int arg) {
-		_priceCode = arg;
+		switch(arg) {
+			case Price.REGULAR:
+				_price = new Regular();
+				break;
+			case Price.NEW_RELEASE:
+				_price = new NewRelease();
+				break;
+			case Price.CHILDRENS:
+				_price = new Children();
+				break;
+			default:
+				throw new IllegalArgumentException("Código de precio incorrecto");
+		}
 	}
 
 	public String getTitle() {
 		return _title;
+	}
+	
+	public double getCharge(Rental rental) {
+		return _price.getCharge(rental);
+	}
+	
+	public double getFrecuentRenterPoints(Rental rental) {
+		return _price.getFrecuentRenterPoints(rental);
 	}
 }
