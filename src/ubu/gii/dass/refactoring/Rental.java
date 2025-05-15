@@ -11,11 +11,11 @@ package ubu.gii.dass.refactoring;
  * 
  */
 public class Rental {
-	Movie _movie;
+	private Movie _movie;
 	private int _daysRented;
 
 	public Rental(Movie movie, int daysRented) {
-		_movie = movie;
+		setMovie(movie);
 		_daysRented = daysRented;
 	}
 
@@ -23,15 +23,19 @@ public class Rental {
 		return _daysRented;
 	}
 
-	public Movie getMovie() {
-		return _movie;
-	}
-
 	public int getFrecuentRenterPoints() {
 		// add bonus for a two day new release rental
 		if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) && getDaysRented() > 1)
 			return 2;
 		return 1;
+	}
+
+	Movie getMovie() {
+		return _movie;
+	}
+
+	void setMovie(Movie _movie) {
+		this._movie = _movie;
 	}
 
 }
