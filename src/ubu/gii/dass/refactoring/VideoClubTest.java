@@ -76,5 +76,26 @@ public class VideoClubTest {
 		assertTrue("Calcula mal el alquiler", salidaEsperada.equals(salida));
 
 	}
+	
+	@Test
+    public void testGenerateHtmlStatement() {
+
+		Rental r1 = new Rental(m11, 5);
+		Rental r2 = new Rental(m0, 1);
+		Rental r3 = new Rental(m2, 10);
+
+		c1.addRental(r1);
+		c1.addRental(r2);
+		c1.addRental(r3);
+		
+		String html = c1.htmlStatement();
+		
+		String datosEsperados = "<H1>Rental Record for Manuel</H1>" +
+	              "<H2>Sky Captain 15.0</H2>" +
+	              "<H2>Accion Mutante 2.0</H2><H2>Hermano Oso 12.0</H2>" +
+	              "<P>Amount owed is 29.0</P><P> You earned 4 frequent renter points </P>";
+
+        assertTrue("El texto esperado no se encuentra en el HTML.", html.equals(datosEsperados));
+    }
 
 }
