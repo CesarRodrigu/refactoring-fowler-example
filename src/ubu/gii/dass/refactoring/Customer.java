@@ -10,7 +10,9 @@ package ubu.gii.dass.refactoring;
 * @see java.io.File
 *
 */
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Customer {
 	private String _name;
@@ -40,27 +42,23 @@ public class Customer {
 			Rental each = rentals.next();
 			// determine amounts for each line
 			thisAmount = each.getCharge();
-			
+
 			// add frequent renter points
-			frequentRenterPoints = getFrecuentRenterPoints(frequentRenterPoints, each);
+			frequentRenterPoints += getFrecuentRenterPoints(each);
 			// show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t"
-					+ String.valueOf(thisAmount) + "\n";
+			result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
 			totalAmount += thisAmount;
 		}
 		// add footer lines
 		result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-		result += "You earned " + String.valueOf(frequentRenterPoints)
-				+ " frequent renter points";
+		result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
 		return result;
 	}
 
-	private int getFrecuentRenterPoints(int frequentRenterPoints, Rental each) {
-		frequentRenterPoints++;
+	private int getFrecuentRenterPoints(Rental each) {
 		// add bonus for a two day new release rental
-		if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE)
-				&& each.getDaysRented() > 1)
-			frequentRenterPoints++;
-		return frequentRenterPoints;
+		if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1)
+			return 2;
+		return 1;
 	}
 }
