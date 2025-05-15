@@ -1,6 +1,6 @@
 package ubu.gii.dass.refactoring;
 
-import src.ubu.gii.dass.refactoring.Rental;
+import ubu.gii.dass.refactoring.Rental;
 
 /**
  * Tema Refactorizaciones
@@ -15,27 +15,28 @@ import src.ubu.gii.dass.refactoring.Rental;
  */
 
 public class Movie {
-	public static final int CHILDRENS = 2;
-	public static final int REGULAR = 0;
-	public static final int NEW_RELEASE = 1;
-
+		
 	private String _title;
 	Price _price;
 
-	public Movie(String title, int priceCode) {
+	public Movie(String title, Price price) {
 		_title = title;
-		setPriceCode(priceCode);
+		setPrice(price);
+	}
+	
+	public void setPrice(Price price) {
+		_price=price;
 	}
 
 	public void setPriceCode(int arg) {
 		switch(arg) {
-			case Movie.REGULAR:
+			case Price.REGULAR:
 				_price = new Regular();
 				break;
-			case Movie.NEW_RELEASE:
+			case Price.NEW_RELEASE:
 				_price = new NewRelease();
 				break;
-			case Movie.CHILDRENS:
+			case Price.CHILDRENS:
 				_price = new Children();
 				break;
 			default:
@@ -49,5 +50,9 @@ public class Movie {
 	
 	public double getCharge(Rental rental) {
 		return _price.getCharge(rental);
+	}
+	
+	public double getFrecuentRenterPoints(Rental rental) {
+		return _price.getFrecuentRenterPoints(rental);
 	}
 }

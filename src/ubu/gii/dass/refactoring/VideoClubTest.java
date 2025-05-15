@@ -23,10 +23,10 @@ public class VideoClubTest {
 
 	@Before
 	public void setUp() {
-		m11 = new Movie("Sky Captain", 1);
-		m12 = new Movie("Alejandro Magno", 1);
-		m0 = new Movie("Accion Mutante", 0);
-		m2 = new Movie("Hermano Oso", 2);
+		m11 = new Movie("Sky Captain", new NewRelease());
+		m12 = new Movie("Alejandro Magno", new NewRelease());
+		m0 = new Movie("Accion Mutante", new Regular());
+		m2 = new Movie("Hermano Oso", new Children());
 
 		c1 = new Customer("Manuel");
 	}
@@ -47,7 +47,7 @@ public class VideoClubTest {
 		c1.addRental(r3);
 
 		String salida = c1.statement();
-
+		
 		String salidaEsperada = new String(
 				"Rental Record for Manuel\n" + "\tSky Captain\t15.0\n" + "\tAccion Mutante\t2.0\n"
 						+ "\tHermano Oso\t12.0\n" + "Amount owed is 29.0\n" + "You earned 4 frequent renter points");
