@@ -20,19 +20,31 @@ public class Movie {
 	public static final int NEW_RELEASE = 1;
 
 	private String _title;
-	private int _priceCode;
+	private Price _price;
 
 	public Movie(String title, int priceCode) {
 		_title = title;
-		_priceCode = priceCode;
+		setPriceCode(priceCode);
 	}
 
 	public int getPriceCode() {
-		return _priceCode;
+		return _price.getPriceCode();
 	}
 
 	public void setPriceCode(int arg) {
-		_priceCode = arg;
+		switch(arg) {
+			case Movie.REGULAR:
+				_price = new Regular();
+				break;
+			case Movie.NEW_RELEASE:
+				_price = new NewRelease();
+				break;
+			case Movie.CHILDRENS:
+				_price = new Children();
+				break;
+			default:
+				throw new IllegalArgumentException("Código de precio incorrecto");
+		}
 	}
 
 	public String getTitle() {
